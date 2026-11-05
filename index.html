@@ -185,8 +185,8 @@ function bind(){
   on('#logout',()=>{owner=false;try{sessionStorage.removeItem('owner')}catch(e){}location.hash='';drawn='';render()});
   on('#own',()=>{if(adminPage()){drawn='';render()}else location.hash='#admin'});
   on('#copy',async()=>{try{await navigator.clipboard.writeText(shareUrl())}catch(e){}const t=document.createElement('div');t.className='toast';t.textContent='Link copiado!';document.body.appendChild(t);setTimeout(()=>t.remove(),1800)});
-  on('#vis',async()=>{await db.put('poll/vis',poll.vis==='link'?'public':'link');load()});
-  on('#stop',async()=>{await db.put('poll/closed',true);load()});
+  on('#vis',async()=>{await db.put('poll',{...poll,vis:poll.vis==='link'?'public':'link'});load()});
+  on('#stop',async()=>{await db.put('poll',{...poll,closed:true});load()});
   on('#newp',()=>{formOpts=['',''];creating=true;drawn='';render()});
   on('#add',()=>{keep();formOpts.push('');drawn='';render()});
   document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{keep();formOpts.splice(+b.dataset.rm,1);drawn='';render()});
