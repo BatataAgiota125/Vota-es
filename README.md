@@ -1,2 +1,2 @@
-# Vota-es
+# Votações
 Dá para votar.
